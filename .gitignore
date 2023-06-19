@@ -6,3 +6,9 @@ foo.png
 
 # Python's cache
 __pycache__/
+
+# Plot result
+*.png
+
+# Crawl result
+*.csv
