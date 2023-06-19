@@ -93,7 +93,7 @@ class PlotGenerator:
                     normal_point + points.foreign]
 
     def save_data(self):
-        data = open("statics.txt", "w+", encoding="utf-8")
+        data = open("statics.csv", "w+", encoding="utf-8")
         csvwrite = csv.writer(data)
         csvwrite.writerows(self.csv_rows)
 
@@ -134,7 +134,7 @@ class PlotGenerator:
 
 if __name__ == "__main__":
     p = PlotGenerator()
-    p.add_contestant(Contestant("0123", "Bình Minh (test unicode: á ơ ộ à ợ)", Points(
+    p.add_contestant(Contestant("0123", "Bình Minh (test unicode: á ơ ộ à ợ ế)", Points(
         0.1, 0.2, 0.3, "eng", 0.3, True, "french")))
     p.generate()
     p.save_data()
