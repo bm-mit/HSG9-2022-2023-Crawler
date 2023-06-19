@@ -101,26 +101,32 @@ class PlotGenerator:
         plt.hist(self.__sum_points)
         plt.title("Sum normal points")
         plt.savefig("SumNormalPoint.png")
+        plt.clf()
 
         plt.hist(self.__spec_sum_points)
         plt.title("Specialized sum points")
         plt.savefig("SpecSumPoint.png")
+        plt.clf()
 
         plt.hist(self.__math_points)
         plt.title("Math points")
         plt.savefig("MathPoints.png")
+        plt.clf()
 
         plt.hist(self.__literature_points)
         plt.title("Literature Points")
         plt.savefig("LiteraturePoints.png")
+        plt.clf()
 
         plt.hist(self.__foreign_points)
         plt.title("Foreign Points")
         plt.savefig("ForeignPoints.png")
+        plt.clf()
 
         plt.hist(self.__spec_points)
         plt.title("Specialized Points")
         plt.savefig("SpecPoints.png")
+        plt.clf()
 
         # plt.hist(self.__spec_sum_points_by_subject, lable="")
         # plt.savefig("aa.png")
@@ -135,6 +141,8 @@ class PlotGenerator:
 if __name__ == "__main__":
     p = PlotGenerator()
     p.add_contestant(Contestant("0123", "Bình Minh (test unicode: á ơ ộ à ợ ế)", Points(
-        0.1, 0.2, 0.3, "eng", 0.3, True, "french")))
+        0.1, 0.2, 0.5, "eng", 0.3, True, "french")))
+    p.add_contestant(Contestant("0123", "Bình Minh (test unicode: á ơ ộ à ợ ế)", Points(
+        0.1, 0.2, 0.8, "eng", 0.2, True, "french")))
     p.generate()
     p.save_data()
