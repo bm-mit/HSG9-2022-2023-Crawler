@@ -3,3 +3,6 @@ foo.png
 
 # VSCode's files
 /.vscode/
+
+# Python's cache
+__pycache__/
