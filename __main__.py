@@ -21,4 +21,4 @@ if __name__ == "__main__":
             name, dob, point = [i.contents[0].strip("\n\r ") for i in infomation.find_all('td')]
             print(i, name, dob, point, file=f, sep=" | ")
         except:
-            print(f"Can't get data with id: {data["sobaodanh"]})
+            print(f"Can't get data with id: {data['sobaodanh']}")
