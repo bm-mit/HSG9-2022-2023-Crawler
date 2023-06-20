@@ -16,14 +16,12 @@ class Points:
     __foreign_lang: str
     __spec_subject: str
 
-    def __init__(self, math, literature, foreign, foreign_lang, spec=0.0, isspec=False, spec_subject=""):
+    def __init__(self, math, literature, foreign, spec=0.0, isspec=False):
         self.__math = math
         self.__literature = literature
         self.__foreign = foreign
-        self.__foreign_lang = foreign_lang
         self.__spec = spec
         self.__isspec = isspec
-        self.__spec_subject = spec_subject
 
     @property
     def math(self):
@@ -59,17 +57,3 @@ class Points:
         Check contestant had taked specialized subject test.
         """
         return self.__isspec
-
-    @property
-    def foreign_lang(self):
-        """
-        Get contestant's foreign language.
-        """
-        return self.__foreign_lang
-
-    @property
-    def spec_subject(self):
-        """
-        Get contestan't specialized subject.
-        """
-        return self.__spec_subject
