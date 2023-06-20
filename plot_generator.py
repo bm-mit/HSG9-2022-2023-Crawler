@@ -16,17 +16,11 @@ class PlotGenerator:
 
     __sum_points: list[float]
     __spec_sum_points: list[float]
-    __spec_sum_points_by_subject: dict[str, list[float]]
 
     __math_points: list[float]
     __literature_points: list[float]
-
     __foreign_points: list[float]
-    __foreign_points_by_subject: dict[str, list[float]]
-    __foreign_sum_points_by_subject = dict[str, list[float]]
-
     __spec_points: list[float]
-    __spec_points_by_subject: dict[str, list[float]]
 
     def __init__(self):
         self.csv_rows = []
@@ -39,11 +33,10 @@ class PlotGenerator:
         self.__literature_points = []
         self.__foreign_points = []
         self.__spec_points = []
-
-        self.__spec_sum_points_by_subject = {}
-        self.__foreign_points_by_subject = {}
-        self.__spec_points_by_subject = {}
-        self.__foreign_sum_points_by_subject = {}
+        
+        data = open("statics.csv", "w+", encoding="utf-8")
+        self.csvwriter = csv.writer(data)
+        self.csvwriter.writerow(("ID", "FULL_NAME", "MATH", "LITERATURE", "FOREIGN", "SPEC", "IS_SPEC"))
 
     def add_contestant(self, contestant: Contestant) -> None:
         """"""
@@ -56,46 +49,13 @@ class PlotGenerator:
         self.__foreign_points.append(points.foreign)
         self.__sum_points.append(normal_point)
         
-        self.csv_rows.append(
-            [contestant.id_code, contestant.full_name, points.math, points.literature, points.foreign, points.foreign_lang, points.spec, points.isspec, points.spec_subject]
+        self.csvwriter.writerow(
+            [contestant.id_code, contestant.full_name, points.math, points.literature, points.foreign, points.spec, points.isspec]
         )
-
-        try:
-            self.__foreign_points_by_subject[points.foreign_lang].append(
-                points.foreign_lang)
-        except Exception:
-            self.__foreign_points_by_subject[points.foreign_lang] = [
-                points.foreign]
 
         if points.isspec:
             self.__spec_points.append(points.spec)
             self.__spec_sum_points.append(normal_point + points.spec * 2)
-
-            try:
-                self.__spec_points_by_subject[points.spec_subject].append(
-                    points.spec)
-            except Exception:
-                self.__spec_points_by_subject[points.spec_subject] = [
-                    points.foreign]
-
-            try:
-                self.__spec_sum_points_by_subject[points.foreign_lang].append(
-                    normal_point + points.spec * 2)
-            except Exception:
-                self.__spec_sum_points_by_subject[points.foreign_lang] = [
-                    normal_point + points.spec * 2]
-
-            try:
-                self.__foreign_sum_points_by_subject[points.foreign_lang].append(
-                    normal_point + points.foreign_lang)
-            except Exception:
-                self.__foreign_sum_points_by_subject[points.foreign_lang] = [
-                    normal_point + points.foreign]
-
-    def save_data(self):
-        data = open("statics.csv", "w+", encoding="utf-8")
-        csvwrite = csv.writer(data)
-        csvwrite.writerows(self.csv_rows)
 
     def generate(self):
         plt.hist(self.__sum_points)
@@ -127,15 +87,6 @@ class PlotGenerator:
         plt.title("Specialized Points")
         plt.savefig("SpecPoints.png")
         plt.clf()
-
-        # plt.hist(self.__spec_sum_points_by_subject, lable="")
-        # plt.savefig("aa.png")
-        # plt.hist(self.__foreign_points_by_subject, lable="")
-        # plt.savefig("aa.png")
-        # plt.hist(self.__spec_points_by_subject, lable="")
-        # plt.savefig("aa.png")
-        # plt.hist(self.__foreign_sum_points_by_subject, lable="")
-        # plt.savefig("aa.png")
 
 
 if __name__ == "__main__":
